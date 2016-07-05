@@ -23,13 +23,13 @@ class MyHash
     result
   end
   define_method(:myHas_value?) do |value|
+    result = false
     @hash.each do |hash_array|
       if hash_array[1] == value
-        true
-      else
-        false
+        result = true
       end
     end
+    result
   end
   define_method(:myLength) do
     length = 0
@@ -40,11 +40,15 @@ class MyHash
   end
   define_method(:myMerge) do |merging_hash|
     merging_hash.each do |merging_hash_array|
-      @hash.each do |hash_array|
+      @hash.each_with_index do |hash_array, idx|
         if hash_array[0] == merging_hash_array[0]
-          hash_array[1] = merging_hash_array[0]
+          hash_array[1] = merging_hash_array[1]
+          break
+        elsif (idx == (@hash.length - 1))
+          @hash.push(merging_hash_array)
         end
       end
     end
+    @hash
   end
 end

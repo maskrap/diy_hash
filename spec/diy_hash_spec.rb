@@ -21,5 +21,31 @@ describe(MyHash) do
       test_hash.myStore("kitten", "cute")
       expect(test_hash.myHas_key?("cute")).to(eq(false))
     end
+    it("returns true if inputted value exists") do
+      test_hash = MyHash.new()
+      test_hash.myStore("kitten", "cute")
+      expect(test_hash.myHas_value?("cute")).to(eq(true))
+    end
+    it("returns false if inputted value does not exist") do
+      test_hash = MyHash.new()
+      test_hash.myStore("kitten", "cute")
+      expect(test_hash.myHas_value?("kitten")).to(eq(false))
+    end
+    it("returns the number of elements that are in the hash") do
+      test_hash = MyHash.new()
+      test_hash.myStore("kitten", "cute")
+      test_hash.myStore("kitten", "cute")
+      test_hash.myStore("kitten", "cute")
+      test_hash.myStore("kitten", "cute")
+      expect(test_hash.myLength).to(eq(4))
+    end
+    it "takes 2 hashes and returns merged hash that replaces the original value for a same key" do
+      test_hash1 = MyHash.new()
+      test_hash2 = [["kitten", "hi"], ["kitten1", "cute1"], ["kitten2", "cute2"]]
+      test_hash1.myStore("kitten", "cute")
+      test_hash1.myStore("kit", "cu")
+      test_hash1.myStore("kitte", "cut")
+      expect(test_hash1.myMerge(test_hash2)).to(eq([["kitten", "hi"], ["kit", "cu"], ["kitte", "cut"], ["kitten1", "cute1"], ["kitten2", "cute2"]]))
+    end
   end
 end
