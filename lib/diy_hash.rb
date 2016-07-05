@@ -2,6 +2,9 @@ class MyHash
   define_method(:initialize)  do
     @hash = []
   end
+  define_method(:hash)  do
+    @hash
+  end
   define_method(:myStore) do |key, value|
     hash_array = [key, value]
     @hash.push(hash_array)
@@ -39,15 +42,17 @@ class MyHash
     length
   end
   define_method(:myMerge) do |merging_hash|
-    merging_hash.each do |merging_hash_array|
+    i =0
+    while i < merging_hash.myLength
       @hash.each_with_index do |hash_array, idx|
-        if hash_array[0] == merging_hash_array[0]
-          hash_array[1] = merging_hash_array[1]
+        if hash_array[0] == merging_hash.hash[i][0]
+          hash_array[1] = merging_hash.hash[i][1]
           break
         elsif (idx == (@hash.length - 1))
-          @hash.push(merging_hash_array)
+          @hash.push(merging_hash.hash[i])
         end
       end
+      i += 1
     end
     @hash
   end

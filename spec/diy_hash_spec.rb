@@ -41,7 +41,10 @@ describe(MyHash) do
     end
     it "takes 2 hashes and returns merged hash that replaces the original value for a same key" do
       test_hash1 = MyHash.new()
-      test_hash2 = [["kitten", "hi"], ["kitten1", "cute1"], ["kitten2", "cute2"]]
+      test_hash2 = MyHash.new()
+      test_hash2.myStore("kitten", "hi")
+      test_hash2.myStore("kitten1", "cute1")
+      test_hash2.myStore("kitten2", "cute2")
       test_hash1.myStore("kitten", "cute")
       test_hash1.myStore("kit", "cu")
       test_hash1.myStore("kitte", "cut")
